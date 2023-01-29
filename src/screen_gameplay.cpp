@@ -25,12 +25,16 @@
 
 #include "raylib.h"
 #include "screens.h"
+#include "GameDefs.h"
+#include "GameState.h"
 
 //----------------------------------------------------------------------------------
 // Module Variables Definition (local)
 //----------------------------------------------------------------------------------
 static int framesCounter = 0;
 static int finishScreen = 0;
+
+GameState gameState;
 
 //----------------------------------------------------------------------------------
 // Gameplay Screen Functions Definition
@@ -49,6 +53,8 @@ void UpdateGameplayScreen(void)
 {
     // TODO: Update GAMEPLAY screen variables here!
 
+    gameState.update();
+
     // Press enter or tap to change to ENDING screen
     if (IsKeyPressed(KEY_ENTER) || IsGestureDetected(GESTURE_TAP))
     {
@@ -64,6 +70,9 @@ void DrawGameplayScreen(void)
     DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), PURPLE);
     Vector2 pos = { 20, 10 };
     DrawTextEx(font, "GAMEPLAY SCREEN", pos, font.baseSize*3.0f, 4, MAROON);
+
+    gameState.draw();
+
     DrawText("PRESS ENTER or TAP to JUMP to ENDING SCREEN", 130, 220, 20, MAROON);
 }
 
