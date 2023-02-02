@@ -1,8 +1,8 @@
 #ifndef ACTOR_H_INCLUDED
+#define ACTOR_H_INCLUDED
 
 #include "raylib.h"
 #include "raymath.h"
-#include "GameState.h"
 
 class GameState;
 
@@ -14,6 +14,9 @@ public:
 
 	virtual void UpdateActor(const GameState& gameState) = 0;
 	virtual void DrawActor() = 0;
+
+	int getPosX() const;
+	int getPosY() const;
 
 protected:
 	int		m_posX;

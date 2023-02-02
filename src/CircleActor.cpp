@@ -1,4 +1,5 @@
 #include "CircleActor.h"
+#include "GameState.h"
 
 CircleActor::CircleActor(int posX, int posY)
 	: Actor(posX, posY)

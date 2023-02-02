@@ -61,3 +61,8 @@ dkms.conf
 
 # Build folder
 [Bb]uild
+/src/game.data
+/src/game.html
+/src/game.js
+/src/game.wasm
+/src/raylib_game.aps

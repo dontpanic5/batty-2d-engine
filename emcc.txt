@@ -1,0 +1,1 @@
+emcc -o game.html Actor.cpp CircleActor.cpp GameState.cpp PlayerActor.cpp raylib_game.cpp screen_ending.cpp screen_gameplay.cpp screen_logo.cpp screen_options.cpp screen_title.cpp -Os -Wall ..\..\raylib\src\libraylib.a -I..\..\raylib\src -s USE_GLFW=3 -s EXPORTED_FUNCTIONS="['_malloc','_main']" -DPLATFORM_WEB --preload-file resources

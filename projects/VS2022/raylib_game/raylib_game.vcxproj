@@ -355,6 +355,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\..\src\Actor.h" />
     <ClInclude Include="..\..\..\src\CircleActor.h" />
+    <ClInclude Include="..\..\..\src\emscripten\emscripten.h" />
     <ClInclude Include="..\..\..\src\GameDefs.h" />
     <ClInclude Include="..\..\..\src\GameState.h" />
     <ClInclude Include="..\..\..\src\PlayerActor.h" />

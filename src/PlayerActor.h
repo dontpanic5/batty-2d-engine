@@ -3,6 +3,8 @@
 
 #include "Actor.h"
 
+class GameState;
+
 class PlayerActor : public Actor
 {
 public:
@@ -10,9 +12,6 @@ public:
 
 	void UpdateActor(const GameState& gameState) override;
 	void DrawActor() override;
-
-	int getPosY() const;
-	int getPosX() const;
 };
 
 #endif // !PLAYER_ACTOR_H_INCLUDED

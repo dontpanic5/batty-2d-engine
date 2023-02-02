@@ -1,4 +1,5 @@
 #ifndef CIRCLE_ACTOR_H_INCLUDED
+#define CIRCLE_ACTOR_H_INCLUDED
 
 #include "Actor.h"
 
