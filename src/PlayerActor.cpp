@@ -1,8 +1,19 @@
 #include "PlayerActor.h"
 
+bool PlayerActor::m_swingswordInit = false;
+
 PlayerActor::PlayerActor(int posX, int posY)
 	: Actor(posX, posY)
 {
+	if (m_swingswordInit == false)
+	{
+		for (unsigned int i = 0; i < FRAME_COUNT; i++)
+		{
+			m_swingsword[i] =
+				LoadTexture("resources/swing_sword/frame_%0.3u_delay-0.03s_out.png");
+		}
+		m_swingswordInit = true;
+	}
 }
 
 void PlayerActor::UpdateActor(const GameState& gameState)
