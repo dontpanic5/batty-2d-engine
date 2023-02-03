@@ -1,18 +1,20 @@
 #include "PlayerActor.h"
+#include "AnimationMgr.h"
+#include <stdio.h>
 
-bool PlayerActor::m_swingswordInit = false;
+bool PlayerActor::m_initialized;
 
 PlayerActor::PlayerActor(int posX, int posY)
 	: Actor(posX, posY)
 {
-	if (m_swingswordInit == false)
+}
+
+void PlayerActor::initPlayerActor()
+{
+	if (m_initialized == false)
 	{
-		for (unsigned int i = 0; i < FRAME_COUNT; i++)
-		{
-			m_swingsword[i] =
-				LoadTexture("resources/swing_sword/frame_%0.3u_delay-0.03s_out.png");
-		}
-		m_swingswordInit = true;
+		AnimationMgr::Instance().Add(121, "resources/swing_sword", "frame_%0.3u_delay-0.03s_out.png");
+		m_initialized = true;
 	}
 }
 
@@ -31,5 +33,5 @@ void PlayerActor::UpdateActor(const GameState& gameState)
 
 void PlayerActor::DrawActor()
 {
-	DrawCircle(m_posX, m_posY, 10, GREEN);
+	
 }

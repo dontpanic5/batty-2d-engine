@@ -9,6 +9,8 @@ class GameState
 public:
 	GameState();
 
+	void init();
+
 	void update();
 	void draw();
 

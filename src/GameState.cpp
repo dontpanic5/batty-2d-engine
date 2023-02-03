@@ -6,6 +6,11 @@ GameState::GameState()
 {
 }
 
+void GameState::init()
+{
+	player.initPlayerActor();
+}
+
 void GameState::update()
 {
 	player.UpdateActor(*this);

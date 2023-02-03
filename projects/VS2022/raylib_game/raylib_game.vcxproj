@@ -354,6 +354,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\Actor.h" />
+    <ClInclude Include="..\..\..\src\Animation.h" />
+    <ClInclude Include="..\..\..\src\AnimationMgr.h" />
     <ClInclude Include="..\..\..\src\CircleActor.h" />
     <ClInclude Include="..\..\..\src\emscripten\emscripten.h" />
     <ClInclude Include="..\..\..\src\GameDefs.h" />
@@ -363,6 +365,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\Actor.cpp" />
+    <ClCompile Include="..\..\..\src\Animation.cpp" />
+    <ClCompile Include="..\..\..\src\AnimationMgr.cpp" />
     <ClCompile Include="..\..\..\src\CircleActor.cpp" />
     <ClCompile Include="..\..\..\src\GameState.cpp" />
     <ClCompile Include="..\..\..\src\PlayerActor.cpp" />

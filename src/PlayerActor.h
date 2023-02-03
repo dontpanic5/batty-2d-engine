@@ -12,12 +12,13 @@ class PlayerActor : public Actor
 public:
 	PlayerActor(int posX, int posY);
 
+	void initPlayerActor();
+
 	void UpdateActor(const GameState& gameState) override;
 	void DrawActor() override;
 
 protected:
-	static Texture2D	m_swingsword[FRAME_COUNT];
-	static bool			m_swingswordInit;
+	static bool			m_initialized;
 };
 
 #endif // !PLAYER_ACTOR_H_INCLUDED

@@ -72,7 +72,7 @@ int main(void)
 
     // Setup and init first screen
     currentScreen = GAMEPLAY;
-    InitLogoScreen();
+    InitGameplayScreen();
 
 #if defined(PLATFORM_WEB)
     emscripten_set_main_loop(UpdateDrawFrame, 60, 1);

@@ -27,6 +27,7 @@
 #include "screens.h"
 #include "GameDefs.h"
 #include "GameState.h"
+#include "AnimationMgr.h"
 
 //----------------------------------------------------------------------------------
 // Module Variables Definition (local)
@@ -35,6 +36,8 @@ static int framesCounter = 0;
 static int finishScreen = 0;
 
 GameState gameState;
+
+static const unsigned int GAME_UNIT = GetScreenWidth() / 25;
 
 //----------------------------------------------------------------------------------
 // Gameplay Screen Functions Definition
@@ -46,6 +49,8 @@ void InitGameplayScreen(void)
     // TODO: Initialize GAMEPLAY screen variables here!
     framesCounter = 0;
     finishScreen = 0;
+
+    gameState.init();
 }
 
 // Gameplay Screen Update logic
@@ -66,14 +71,17 @@ void UpdateGameplayScreen(void)
 // Gameplay Screen Draw logic
 void DrawGameplayScreen(void)
 {
-    // TODO: Draw GAMEPLAY screen here!
-    DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), PURPLE);
-    Vector2 pos = { 20, 10 };
-    DrawTextEx(font, "GAMEPLAY SCREEN", pos, font.baseSize*3.0f, 4, MAROON);
+    DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), BLACK);
+
+    // dirt
+
+
+    //Vector2 pos = { 20, 10 };
+    //DrawTextEx(font, "GAMEPLAY SCREEN", pos, font.baseSize*3.0f, 4, MAROON);
 
     gameState.draw();
 
-    DrawText("PRESS ENTER or TAP to JUMP to ENDING SCREEN", 130, 220, 20, MAROON);
+    //DrawText("PRESS ENTER or TAP to JUMP to ENDING SCREEN", 130, 220, 20, MAROON);
 }
 
 // Gameplay Screen Unload logic
