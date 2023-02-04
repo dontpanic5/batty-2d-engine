@@ -12,13 +12,7 @@ struct pos
 	int y;
 };
 
-enum DIRECTION
-{
-	UP,
-	DOWN,
-	LEFT,
-	RIGHT
-};
+
 
 enum GameType
 {

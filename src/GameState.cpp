@@ -27,6 +27,7 @@ GameState::GameState()
 void GameState::init()
 {
 	player.initPlayerActor();
+	monster.initMonsterActor();
 }
 
 void GameState::update()
@@ -41,7 +42,12 @@ void GameState::update()
 		monster.UpdateActor(*this);
 	}
 
-	if (monster.)
+	if (monster.getStatus() == STATUS::DEAD /* || */)
+	{
+		// TODO add player kill condition
+		
+		// level over
+	}
 }
 
 void GameState::draw()

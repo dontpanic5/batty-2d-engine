@@ -2,9 +2,26 @@
 #include "GameDefs.h"
 #include "GameState.h"
 
+bool MonsterActor::m_initialized = false;
+
+Texture2D MonsterActor::alive;
+Texture2D MonsterActor::pumped;
+Texture2D MonsterActor::dead;
+
 MonsterActor::MonsterActor(int posX, int posY)
 	: Actor(posX, posY)
 {
+}
+
+void MonsterActor::initMonsterActor()
+{
+	if (m_initialized == false)
+	{
+		alive	= LoadTexture("resources/monster.png");
+		pumped	= LoadTexture("resources/inflated_monster.png");
+		dead	= LoadTexture("resources/dead_monster.png");
+		m_initialized = true;
+	}
 }
 
 void MonsterActor::UpdateActor(const GameState& gameState)
@@ -21,20 +38,23 @@ void MonsterActor::UpdateActor(const GameState& gameState)
 
 void MonsterActor::DrawActor()
 {
-	Color color;
+	Texture2D tex;
 	if (m_status == STATUS::PUMPED)
 	{
-		color = DARKPURPLE;
+		tex = pumped;
 	}
 	else if (m_status == STATUS::NONE)
 	{
-		color = RED;
+		tex = alive;
 	}
 	else
 	{
-		color = BLACK;
+		tex = dead;
 	}
-	DrawRectangle(unitToDirtSpaceX(m_posX), unitToDirtSpaceY(m_posY), UNIT_SIZE_PX, UNIT_SIZE_PX, color);
+
+
+	float scale = (float)UNIT_SIZE_PX / (float)tex.height;
+	DrawTextureEx(tex, { (float)unitToDirtSpaceX(m_posX), (float)unitToDirtSpaceY(m_posY) }, 0.0f, scale, WHITE);
 }
 
 STATUS MonsterActor::getStatus() const

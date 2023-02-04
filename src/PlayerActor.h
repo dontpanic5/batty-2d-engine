@@ -2,10 +2,17 @@
 #define PLAYER_ACTOR_H_INCLUDED
 
 #include "Actor.h"
+#include "GameDefs.h"
 
 constexpr unsigned int FRAME_COUNT = 122;
 
 class GameState;
+
+enum PlayerPoseToDraw
+{
+	PPTD_STANDING,
+	PPTD_ATTACKING
+};
 
 class PlayerActor : public Actor
 {
@@ -21,9 +28,15 @@ public:
 	void DrawActor() override;
 
 protected:
-	static bool	m_initialized;
-	bool		m_moved			= false;
-	bool		m_attacked		= false;
+	static bool			m_initialized;
+	static Texture2D	s_miner;
+	static Texture2D	s_pumpR;
+	static Texture2D	s_pumpL;
+
+	bool				m_moved				= false;
+	bool				m_attacked			= false;
+	PlayerPoseToDraw	pose				= PPTD_STANDING;
+	DIRECTION			m_dir				= DIRECTION::DIR_NONE;
 
 	void reset();
 };

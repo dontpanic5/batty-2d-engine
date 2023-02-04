@@ -12,4 +12,13 @@ int unitToDirtSpaceY(int unit);
 
 constexpr unsigned int UNIT_SIZE_PX = SCREEN_WIDTH / GAME_UNITS;
 
+enum DIRECTION
+{
+	UP,
+	DOWN,
+	LEFT,
+	RIGHT,
+	DIR_NONE
+};
+
 #endif // !GAMEDEFS_H_INCLUDED

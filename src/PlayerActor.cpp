@@ -4,7 +4,10 @@
 #include "GameDefs.h"
 #include "GameState.h"
 
-bool PlayerActor::m_initialized;
+bool		PlayerActor::m_initialized;
+Texture2D	PlayerActor::s_miner;
+Texture2D	PlayerActor::s_pumpL;
+Texture2D	PlayerActor::s_pumpR;
 
 PlayerActor::PlayerActor(int posX, int posY)
 	: Actor(posX, posY)
@@ -16,6 +19,14 @@ void PlayerActor::initPlayerActor()
 	if (m_initialized == false)
 	{
 		//AnimationMgr::Instance().Add(121, "resources/swing_sword", "frame_%0.3u_delay-0.03s_out.png");
+
+		s_miner		= LoadTexture("resources/miner.png");
+		s_pumpR		= LoadTexture("resources/miner_pump.png");
+
+		Image pumpL	= LoadImage("resources/miner_pump.png");
+		ImageFlipHorizontal(&pumpL);
+		s_pumpL		= LoadTextureFromImage(pumpL);
+
 		m_initialized = true;
 	}
 }
@@ -68,19 +79,39 @@ void PlayerActor::UpdateActor(const GameState& gameState)
 		{
 			m_posX = myPos.x;
 			m_posY = myPos.y;
+			m_dir = dir;
 		}
 		else if (obstacleHit == GT_MONSTER)
 		{
 			m_attacked = true;
+			pose = PPTD_ATTACKING;
 			// we didn't move to a new square but by shooting the pump we're making a "move"
 			m_moved = true;
+		}
+		if (obstacleHit != GT_MONSTER)
+		{
+			pose = PPTD_STANDING;
 		}
 	}
 }
 
 void PlayerActor::DrawActor()
 {
-	DrawRectangle(unitToDirtSpaceX(m_posX), unitToDirtSpaceY(m_posY), UNIT_SIZE_PX, UNIT_SIZE_PX, BLUE);
+	Texture2D tex;
+	if (pose == PPTD_ATTACKING)
+	{
+		if (m_dir == LEFT)
+			tex = s_pumpL;
+		else
+			tex = s_pumpR;
+	}
+	else
+	{
+		tex = s_miner;
+	}
+
+	float scale = (float)UNIT_SIZE_PX / (float)tex.height;
+	DrawTextureEx(tex, { (float)unitToDirtSpaceX(m_posX), (float)unitToDirtSpaceY(m_posY) }, 0.0f, scale, WHITE);
 }
 
 void PlayerActor::reset()
