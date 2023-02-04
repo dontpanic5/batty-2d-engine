@@ -13,7 +13,7 @@ void PlayerActor::initPlayerActor()
 {
 	if (m_initialized == false)
 	{
-		AnimationMgr::Instance().Add(121, "resources/swing_sword", "frame_%0.3u_delay-0.03s_out.png");
+		//AnimationMgr::Instance().Add(121, "resources/swing_sword", "frame_%0.3u_delay-0.03s_out.png");
 		m_initialized = true;
 	}
 }
@@ -33,5 +33,5 @@ void PlayerActor::UpdateActor(const GameState& gameState)
 
 void PlayerActor::DrawActor()
 {
-	
+	DrawRectangle(m_posX, m_posY, 20, 20, BLUE);
 }

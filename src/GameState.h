@@ -4,6 +4,8 @@
 #include "PlayerActor.h"
 #include "CircleActor.h"
 
+#include "GameDefs.h"
+
 class GameState
 {
 public:
@@ -20,6 +22,8 @@ protected:
 	PlayerActor player;
 
 	CircleActor circle;
+
+	bool dirt[GAME_UNITS][GAME_UNITS];
 };
 
 #endif // !GAME_STATE_H_INCLUDED

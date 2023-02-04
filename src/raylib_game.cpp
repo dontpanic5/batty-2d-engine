@@ -58,7 +58,7 @@ int main(void)
 {
     // Initialization
     //---------------------------------------------------------
-    InitWindow(screenWidth, screenHeight, "raylib game template");
+    InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "raylib game template");
 
     InitAudioDevice();      // Initialize audio device
 
@@ -68,7 +68,7 @@ int main(void)
     fxCoin = LoadSound("resources/coin.wav");
 
     SetMusicVolume(music, 1.0f);
-    PlayMusicStream(music);
+    //PlayMusicStream(music);
 
     // Setup and init first screen
     currentScreen = GAMEPLAY;

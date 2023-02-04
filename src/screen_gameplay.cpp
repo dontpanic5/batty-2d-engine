@@ -37,8 +37,6 @@ static int finishScreen = 0;
 
 GameState gameState;
 
-static const unsigned int GAME_UNIT = GetScreenWidth() / 25;
-
 //----------------------------------------------------------------------------------
 // Gameplay Screen Functions Definition
 //----------------------------------------------------------------------------------
@@ -71,10 +69,8 @@ void UpdateGameplayScreen(void)
 // Gameplay Screen Draw logic
 void DrawGameplayScreen(void)
 {
+    //background
     DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), BLACK);
-
-    // dirt
-
 
     //Vector2 pos = { 20, 10 };
     //DrawTextEx(font, "GAMEPLAY SCREEN", pos, font.baseSize*3.0f, 4, MAROON);
