@@ -360,6 +360,7 @@
     <ClInclude Include="..\..\..\src\emscripten\emscripten.h" />
     <ClInclude Include="..\..\..\src\GameDefs.h" />
     <ClInclude Include="..\..\..\src\GameState.h" />
+    <ClInclude Include="..\..\..\src\MonsterActor.h" />
     <ClInclude Include="..\..\..\src\PlayerActor.h" />
     <ClInclude Include="..\..\..\src\screens.h" />
   </ItemGroup>
@@ -368,7 +369,9 @@
     <ClCompile Include="..\..\..\src\Animation.cpp" />
     <ClCompile Include="..\..\..\src\AnimationMgr.cpp" />
     <ClCompile Include="..\..\..\src\CircleActor.cpp" />
+    <ClCompile Include="..\..\..\src\GameDefs.cpp" />
     <ClCompile Include="..\..\..\src\GameState.cpp" />
+    <ClCompile Include="..\..\..\src\MonsterActor.cpp" />
     <ClCompile Include="..\..\..\src\PlayerActor.cpp" />
     <ClCompile Include="..\..\..\src\raylib_game.cpp" />
     <ClCompile Include="..\..\..\src\screen_logo.cpp" />

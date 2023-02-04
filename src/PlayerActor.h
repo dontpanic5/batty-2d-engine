@@ -14,11 +14,18 @@ public:
 
 	void initPlayerActor();
 
+	bool playerMoved() const;
+	bool didAttack() const;
+
 	void UpdateActor(const GameState& gameState) override;
 	void DrawActor() override;
 
 protected:
-	static bool			m_initialized;
+	static bool	m_initialized;
+	bool		m_moved			= false;
+	bool		m_attacked		= false;
+
+	void reset();
 };
 
 #endif // !PLAYER_ACTOR_H_INCLUDED

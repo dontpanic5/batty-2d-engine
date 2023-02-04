@@ -1,6 +1,8 @@
 #include "PlayerActor.h"
 #include "AnimationMgr.h"
 #include <stdio.h>
+#include "GameDefs.h"
+#include "GameState.h"
 
 bool PlayerActor::m_initialized;
 
@@ -18,20 +20,71 @@ void PlayerActor::initPlayerActor()
 	}
 }
 
+bool PlayerActor::playerMoved() const
+{
+	return m_moved;
+}
+
+bool PlayerActor::didAttack() const
+{
+	return m_attacked;
+}
+
 void PlayerActor::UpdateActor(const GameState& gameState)
 {
-	if (IsKeyDown(KEY_UP))
-		m_posY--;
-	else if (IsKeyDown(KEY_DOWN))
-		m_posY++;
+	reset();
 
-	if (IsKeyDown(KEY_RIGHT))
-		m_posX++;
-	else if (IsKeyDown(KEY_LEFT))
-		m_posX--;
+	bool gotPress = false;
+
+	pos myPos = { m_posX, m_posY };
+	DIRECTION dir;
+
+	if (IsKeyPressed(KEY_UP))
+	{
+		dir = UP;
+		gotPress = true;
+	}
+	else if (IsKeyPressed(KEY_DOWN))
+	{
+		dir = DOWN;
+		gotPress = true;
+	}
+	else if (IsKeyPressed(KEY_RIGHT))
+	{
+		dir = RIGHT;
+		gotPress = true;
+	}
+	else if (IsKeyPressed(KEY_LEFT))
+	{
+		dir = LEFT;
+		gotPress = true;
+	}
+
+	if (gotPress)
+	{
+		GameType obstacleHit = GT_NONE;
+		m_moved = gameState.moveIfAvailable(myPos, dir, GameType::GT_PLAYER, &obstacleHit);
+		if (m_moved)
+		{
+			m_posX = myPos.x;
+			m_posY = myPos.y;
+		}
+		else if (obstacleHit == GT_MONSTER)
+		{
+			m_attacked = true;
+			// we didn't move to a new square but by shooting the pump we're making a "move"
+			m_moved = true;
+		}
+	}
 }
 
 void PlayerActor::DrawActor()
 {
-	DrawRectangle(m_posX, m_posY, 20, 20, BLUE);
+	DrawRectangle(unitToDirtSpaceX(m_posX), unitToDirtSpaceY(m_posY), UNIT_SIZE_PX, UNIT_SIZE_PX, BLUE);
+}
+
+void PlayerActor::reset()
+{
+	m_moved		= false;
+	m_attacked	= false;
 }

@@ -18,9 +18,6 @@ public:
 	int getPosX() const;
 	int getPosY() const;
 
-	int getGameUnitX() const;
-	int getGameUnitY() const;
-
 protected:
 	int		m_posX;
 	int		m_posY;

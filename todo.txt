@@ -1,0 +1,26 @@
+add monster for player to kill
+	planning on this being the goal
+	takes multiple turns to kill
+roots spread out instead of straight following
+put bounds on player movement
+roots can't pass through tunnels or pass slowly
+seeds that grow roots
+rocks that block the root
+ai art
+	redo tree
+		make tree then put face on
+		ai voice lines
+			poems, relevant to situation
+			mouth animates
+		more than one tree
+	all other art
+make site
+build release versions
+	win32
+	html5
+		check if mobile is good
+	mobile
+		android
+		necessary if plays well on mobile web?
+instructions
+options

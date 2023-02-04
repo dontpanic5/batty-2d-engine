@@ -37,6 +37,8 @@ static int finishScreen = 0;
 
 GameState gameState;
 
+Texture2D tree;
+
 //----------------------------------------------------------------------------------
 // Gameplay Screen Functions Definition
 //----------------------------------------------------------------------------------
@@ -49,6 +51,8 @@ void InitGameplayScreen(void)
     finishScreen = 0;
 
     gameState.init();
+
+    tree = LoadTexture("resources/tree.png");
 }
 
 // Gameplay Screen Update logic
@@ -74,6 +78,8 @@ void DrawGameplayScreen(void)
 
     //Vector2 pos = { 20, 10 };
     //DrawTextEx(font, "GAMEPLAY SCREEN", pos, font.baseSize*3.0f, 4, MAROON);
+
+    DrawTexture(tree, 0, 0, WHITE);
 
     gameState.draw();
 
