@@ -12,8 +12,6 @@ struct pos
 	int y;
 };
 
-
-
 enum GameType
 {
 	GT_PLAYER,
@@ -37,6 +35,8 @@ public:
 
 	bool moveIfAvailable(pos& curPos, DIRECTION dir, GameType me, GameType *obstacleHit) const;
 
+	pos closestRootToPlayer() const;
+
 protected:
 	PlayerActor player;
 
@@ -52,8 +52,6 @@ protected:
 	unsigned int moveCounter = 0;
 
 	void growRoots();
-
-	pos closestRootToPlayer();
 };
 
 #endif // !GAME_STATE_H_INCLUDED

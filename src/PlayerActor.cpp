@@ -8,6 +8,7 @@ bool		PlayerActor::m_initialized;
 Texture2D	PlayerActor::s_miner;
 Texture2D	PlayerActor::s_pumpL;
 Texture2D	PlayerActor::s_pumpR;
+Texture2D	PlayerActor::s_ded;
 
 PlayerActor::PlayerActor(int posX, int posY)
 	: Actor(posX, posY)
@@ -22,6 +23,7 @@ void PlayerActor::initPlayerActor()
 
 		s_miner		= LoadTexture("resources/miner.png");
 		s_pumpR		= LoadTexture("resources/miner_pump.png");
+		s_ded		= LoadTexture("resources/miner_ded.png");
 
 		Image pumpL	= LoadImage("resources/miner_pump.png");
 		ImageFlipHorizontal(&pumpL);
@@ -84,26 +86,37 @@ void PlayerActor::UpdateActor(const GameState& gameState)
 		else if (obstacleHit == GT_MONSTER)
 		{
 			m_attacked = true;
-			pose = PPTD_ATTACKING;
+			m_status = PPTD_ATTACKING;
 			// we didn't move to a new square but by shooting the pump we're making a "move"
 			m_moved = true;
 		}
 		if (obstacleHit != GT_MONSTER)
 		{
-			pose = PPTD_STANDING;
+			m_status = PPTD_STANDING;
 		}
 	}
+}
+
+void PlayerActor::UpdateDeath(const GameState& gameState)
+{
+	pos closestRoot = gameState.closestRootToPlayer();
+	if (closestRoot.x == m_posX && closestRoot.y == m_posY)
+		m_status = PPTD_DEAD;
 }
 
 void PlayerActor::DrawActor()
 {
 	Texture2D tex;
-	if (pose == PPTD_ATTACKING)
+	if (m_status == PPTD_ATTACKING)
 	{
 		if (m_dir == LEFT)
 			tex = s_pumpL;
 		else
 			tex = s_pumpR;
+	}
+	else if (m_status == PPTD_DEAD)
+	{
+		tex = s_ded;
 	}
 	else
 	{
@@ -112,6 +125,11 @@ void PlayerActor::DrawActor()
 
 	float scale = (float)UNIT_SIZE_PX / (float)tex.height;
 	DrawTextureEx(tex, { (float)unitToDirtSpaceX(m_posX), (float)unitToDirtSpaceY(m_posY) }, 0.0f, scale, WHITE);
+}
+
+PLAYER_STATUS PlayerActor::getStatus() const
+{
+	return m_status;
 }
 
 void PlayerActor::reset()

@@ -4,6 +4,13 @@
 
 pos moveInDir(pos pos, DIRECTION dir);
 
+enum GAME_STATE_WIN_LOSE
+{
+	GSWL_NONE,
+	GSWL_WIN,
+	GSWL_LOSE
+};
+
 GameState::GameState()
 	: player(GAME_UNITS/2, GAME_UNITS /2), monster(1, GAME_UNITS / 2)
 {
@@ -39,14 +46,18 @@ void GameState::update()
 	{
 		growRoots();
 
+		player.UpdateDeath(*this);
+
 		monster.UpdateActor(*this);
 	}
 
-	if (monster.getStatus() == STATUS::DEAD /* || */)
+	if (player.getStatus() == PLAYER_STATUS::PPTD_DEAD)
 	{
-		// TODO add player kill condition
-		
-		// level over
+		// lose
+	}
+	else if (monster.getStatus() == STATUS::DEAD)
+	{
+		// win
 	}
 }
 
@@ -198,7 +209,7 @@ pos moveInDir(pos pos, DIRECTION dir)
 	return pos;
 }
 
-pos GameState::closestRootToPlayer()
+pos GameState::closestRootToPlayer() const
 {
 	bool foundRoot = false;
 	pos closest;
