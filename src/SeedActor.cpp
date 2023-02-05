@@ -24,7 +24,7 @@ void SeedActor::initSeedActor()
 }
 
 void SeedActor::UpdateActor(const GameState& gameState)
-{
+{/*
 		pos closestRoot = gameState.closestRootToPlayer();
 
 		if (m_roots[closestRoot.x][closestRoot.y] == RS_HALF)
@@ -149,7 +149,7 @@ void SeedActor::UpdateActor(const GameState& gameState)
 				m_roots[closestRoot.x][closestRoot.y] = RS_HALF;
 			else
 				m_roots[closestRoot.x][closestRoot.y] = RS_FILLED;
-		}
+		}*/
 }
 
 void SeedActor::DrawActor(const GameState& gameState)

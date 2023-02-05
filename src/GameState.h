@@ -3,7 +3,7 @@
 
 #include "PlayerActor.h"
 #include "MonsterActor.h"
-#include "SeedActor.h"
+//#include "SeedActor.h"
 
 #include "GameDefs.h"
 #include "Level.h"
@@ -76,8 +76,8 @@ protected:
 
 	MonsterActor monster;
 
-	SeedActor	seeds[MAX_SEEDS];
-	int			m_nSeeds = 0;
+	//SeedActor	seeds[MAX_SEEDS];
+	//int			m_nSeeds = 0;
 
 	bool m_dirt[MAX_GAME_UNITS][MAX_GAME_UNITS];
 
@@ -98,6 +98,8 @@ protected:
 	Music m_music;
 	bool m_startedMusic = false;
 	float m_musicStopTime;
+
+	bool m_started = false;
 };
 
 #endif // !GAME_STATE_H_INCLUDED
