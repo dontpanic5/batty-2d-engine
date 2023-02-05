@@ -5,6 +5,7 @@
 #include "MonsterActor.h"
 
 #include "GameDefs.h"
+#include "Level.h"
 
 struct pos
 {
@@ -21,10 +22,18 @@ enum GameType
 	GT_NONE
 };
 
+enum GAME_STATE_WIN_LOSE
+{
+	GSWL_NONE,
+	GSWL_WIN,
+	GSWL_LOSE,
+	GSWL_END
+};
+
 class GameState
 {
 public:
-	GameState();
+	GameState(Level *level, int nLevels);
 
 	void init();
 
@@ -37,19 +46,33 @@ public:
 
 	pos closestRootToPlayer() const;
 
+
+	int getUnitSzPx() const;
+	int unitToDirtSpaceX(int unit) const;
+	int unitToDirtSpaceY(int unit) const;
+
 protected:
+	Level *m_curLevel;
+	int m_curLevelIdx = 0;
+	int m_nLevels;
+
 	PlayerActor player;
 
 	MonsterActor monster;
 
-	bool m_dirt[GAME_UNITS][GAME_UNITS];
+	bool m_dirt[MAX_GAME_UNITS][MAX_GAME_UNITS];
 
-	bool m_roots[GAME_UNITS][GAME_UNITS];
+	bool m_roots[MAX_GAME_UNITS][MAX_GAME_UNITS];
 
-	pos m_rootTips[GAME_UNITS * GAME_UNITS];
+	pos m_rootTips[MAX_GAME_UNITS * MAX_GAME_UNITS];
 	unsigned int m_nRootTips = 0;
 
 	unsigned int moveCounter = 0;
+
+	GAME_STATE_WIN_LOSE m_gameStateWinLose = GSWL_NONE;
+
+	void reset();
+	void resetAll();
 
 	void growRoots();
 };

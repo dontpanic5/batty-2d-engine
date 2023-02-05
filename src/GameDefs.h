@@ -1,16 +1,17 @@
 #ifndef GAMEDEFS_H_INCLUDED
 #define GAMEDEFS_H_INCLUDED
 
-constexpr int SCREEN_WIDTH	= 520;
-constexpr int TREE_HEIGHT	= 276;
-constexpr int SCREEN_HEIGHT	= SCREEN_WIDTH + TREE_HEIGHT;
+constexpr int SCREEN_WIDTH		= 520;
+constexpr int TREE_HEIGHT		= 276;
+constexpr int SCREEN_HEIGHT		= SCREEN_WIDTH + TREE_HEIGHT;
 
-constexpr unsigned int GAME_UNITS = 6;
+constexpr int MAX_GAME_UNITS	= 20;
 
-int unitToDirtSpaceX(int unit);
-int unitToDirtSpaceY(int unit);
+#define DEBUG
+#ifdef DEBUG
+#define DRAW_GRID
+#endif // DEBUG
 
-constexpr unsigned int UNIT_SIZE_PX = SCREEN_WIDTH / GAME_UNITS;
 
 enum DIRECTION
 {

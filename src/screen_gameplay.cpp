@@ -28,6 +28,7 @@
 #include "GameDefs.h"
 #include "GameState.h"
 #include "AnimationMgr.h"
+#include "Level.h"
 
 //----------------------------------------------------------------------------------
 // Module Variables Definition (local)
@@ -35,7 +36,16 @@
 static int framesCounter = 0;
 static int finishScreen = 0;
 
-GameState gameState;
+constexpr unsigned int NUM_LEVELS = 3;
+
+Level levels[NUM_LEVELS] =
+{
+    Level(6, 3, 3, 1, 3),
+    Level(6, 3, 1, 1, 3),
+    Level(6, 5, 2, 0, 5)
+};
+
+GameState gameState(levels, NUM_LEVELS);
 
 Texture2D tree;
 
@@ -63,11 +73,11 @@ void UpdateGameplayScreen(void)
     gameState.update();
 
     // Press enter or tap to change to ENDING screen
-    if (IsKeyPressed(KEY_ENTER) || IsGestureDetected(GESTURE_TAP))
+    /*if (IsKeyPressed(KEY_ENTER) || IsGestureDetected(GESTURE_TAP))
     {
         finishScreen = 1;
         PlaySound(fxCoin);
-    }
+    }*/
 }
 
 // Gameplay Screen Draw logic

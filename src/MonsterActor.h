@@ -18,7 +18,7 @@ public:
 	void initMonsterActor();
 
 	void UpdateActor(const GameState& gameState) override;
-	void DrawActor() override;
+	void DrawActor(const GameState& gameState) override;
 
 	STATUS getStatus() const;
 

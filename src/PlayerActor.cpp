@@ -104,7 +104,7 @@ void PlayerActor::UpdateDeath(const GameState& gameState)
 		m_status = PPTD_DEAD;
 }
 
-void PlayerActor::DrawActor()
+void PlayerActor::DrawActor(const GameState& gameState)
 {
 	Texture2D tex;
 	if (m_status == PPTD_ATTACKING)
@@ -123,8 +123,11 @@ void PlayerActor::DrawActor()
 		tex = s_miner;
 	}
 
-	float scale = (float)UNIT_SIZE_PX / (float)tex.height;
-	DrawTextureEx(tex, { (float)unitToDirtSpaceX(m_posX), (float)unitToDirtSpaceY(m_posY) }, 0.0f, scale, WHITE);
+	float scale = (float) gameState.getUnitSzPx() / (float)tex.height;
+	DrawTextureEx(
+		tex,
+		{ (float)gameState.unitToDirtSpaceX(m_posX), (float)gameState.unitToDirtSpaceY(m_posY) },
+		0.0f, scale, WHITE);
 }
 
 PLAYER_STATUS PlayerActor::getStatus() const

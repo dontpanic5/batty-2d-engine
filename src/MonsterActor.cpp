@@ -36,7 +36,7 @@ void MonsterActor::UpdateActor(const GameState& gameState)
 	}
 }
 
-void MonsterActor::DrawActor()
+void MonsterActor::DrawActor(const GameState& gameState)
 {
 	Texture2D tex;
 	if (m_status == STATUS::PUMPED)
@@ -53,8 +53,11 @@ void MonsterActor::DrawActor()
 	}
 
 
-	float scale = (float)UNIT_SIZE_PX / (float)tex.height;
-	DrawTextureEx(tex, { (float)unitToDirtSpaceX(m_posX), (float)unitToDirtSpaceY(m_posY) }, 0.0f, scale, WHITE);
+	float scale = (float)gameState.getUnitSzPx() / (float)tex.height;
+	DrawTextureEx(
+		tex,
+		{ (float)gameState.unitToDirtSpaceX(m_posX), (float)gameState.unitToDirtSpaceY(m_posY) },
+		0.0f, scale, WHITE);
 }
 
 STATUS MonsterActor::getStatus() const

@@ -27,7 +27,7 @@ public:
 
 	void UpdateActor(	const GameState& gameState	) override;
 	void UpdateDeath(	const GameState& gameState	);
-	void DrawActor(									) override;
+	void DrawActor(		const GameState& gameState	) override;
 
 	PLAYER_STATUS getStatus() const;
 

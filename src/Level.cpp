@@ -1,0 +1,35 @@
+#include "Level.h"
+
+Level::Level(int gameUnits,
+	unsigned int playerX, unsigned int playerY,
+	unsigned int monsterX, unsigned int monsterY)
+	: m_gameUnits(gameUnits),
+	playerX(playerX), playerY(playerY),
+	monsterX(monsterX), monsterY(monsterY)
+{
+}
+
+int Level::getGameUnits() const
+{
+	return m_gameUnits;
+}
+
+unsigned int Level::getPlayerX() const
+{
+	return playerX;
+}
+
+unsigned int Level::getPlayerY() const
+{
+	return playerY;
+}
+
+unsigned int Level::getMonsterX() const
+{
+	return monsterX;
+}
+
+unsigned int Level::getMonsterY() const
+{
+	return monsterY;
+}

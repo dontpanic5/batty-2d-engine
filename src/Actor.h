@@ -13,7 +13,7 @@ public:
 	Actor(int posX, int posY, float rot);
 
 	virtual void UpdateActor(const GameState& gameState) = 0;
-	virtual void DrawActor() = 0;
+	virtual void DrawActor(const GameState& gameState) = 0;
 
 	int getPosX() const;
 	int getPosY() const;
