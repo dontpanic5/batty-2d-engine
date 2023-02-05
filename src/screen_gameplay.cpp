@@ -36,16 +36,29 @@
 static int framesCounter = 0;
 static int finishScreen = 0;
 
-constexpr unsigned int NUM_LEVELS = 3;
+constexpr unsigned int NUM_LEVELS = 10;
+
+SeedSpecifier level10Seeds[1] = {{5, 5}};
 
 Level levels[NUM_LEVELS] =
 {
     Level(6, 4, 3, 1, 3),
-    Level(6, 3, 1, 1, 3),
-    Level(6, 5, 2, 0, 5)
+    Level(6, 3, 0, 1, 3),
+    Level(6, 5, 2, 0, 5),
+    Level(6, 5, 1, 0, 5),
+    Level(6, 5, 0, 0, 3),
+    Level(6, 5, 0, 0, 2),
+    Level(6, 5, 0, 0, 1),
+    Level(6, 5, 0, 0, 0),
+    Level(6, 5, 2, 0, 0),
+    Level(6, 4, 3, 1, 3, level10Seeds, 1)
 };
 
+#ifdef LEVEL_SKIP
+GameState gameState(levels + LEVEL_SKIP - 1, NUM_LEVELS);
+#else // LEVEL_SKIP
 GameState gameState(levels, NUM_LEVELS);
+#endif
 
 Texture2D tree;
 

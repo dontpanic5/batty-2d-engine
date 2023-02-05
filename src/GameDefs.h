@@ -10,6 +10,7 @@ constexpr int MAX_GAME_UNITS	= 20;
 #define DEBUG
 #ifdef DEBUG
 #define DRAW_GRID
+#define LEVEL_SKIP 10
 #endif // DEBUG
 
 

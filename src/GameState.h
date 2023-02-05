@@ -3,6 +3,7 @@
 
 #include "PlayerActor.h"
 #include "MonsterActor.h"
+#include "SeedActor.h"
 
 #include "GameDefs.h"
 #include "Level.h"
@@ -37,6 +38,8 @@ enum GAME_STATE_WIN_LOSE
 	GSWL_END
 };
 
+#define MAX_SEEDS 8
+
 class GameState
 {
 public:
@@ -60,12 +63,19 @@ public:
 
 protected:
 	Level *m_curLevel;
+#ifdef LEVEL_SKIP
+	int m_curLevelIdx = LEVEL_SKIP - 1;
+#else // LEVEL_SKIP
 	int m_curLevelIdx = 0;
+#endif
 	int m_nLevels;
 
 	PlayerActor player;
 
 	MonsterActor monster;
+
+	SeedActor	seeds[MAX_SEEDS];
+	int			m_nSeeds = 0;
 
 	bool m_dirt[MAX_GAME_UNITS][MAX_GAME_UNITS];
 

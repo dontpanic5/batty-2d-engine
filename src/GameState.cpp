@@ -8,8 +8,17 @@ pos moveInDir(pos pos, DIRECTION dir);
 GameState::GameState(Level *level, int nLevels)
 	: m_curLevel(level), m_nLevels(nLevels),
 	player(level[0].getPlayerX(), level[0].getPlayerY()),
-	monster(level[0].getMonsterX(), level[0].getMonsterY())
+	monster(level[0].getMonsterX(), level[0].getMonsterY()),
+	m_nSeeds(level[0].getNSeed())
 {
+	if (level->getNSeed())
+	{
+		for (int i = 0; i < level->getNSeed(); i++)
+		{
+			seeds[i] = SeedActor(level->getSeed(i).seedX, level->getSeed(i).seedY);
+		}
+	}
+
 	reset();
 }
 
@@ -17,6 +26,7 @@ void GameState::init()
 {
 	player.initPlayerActor();
 	monster.initMonsterActor();
+	seeds[0].initSeedActor();
 }
 
 void GameState::update()
@@ -141,6 +151,11 @@ void GameState::draw()
 					BLACK);
 			}
 		}
+	}
+
+	for (int i = 0; i < m_nSeeds; i++)
+	{
+		seeds[i].DrawActor(*this);
 	}
 
 	monster.DrawActor(*this);
@@ -452,8 +467,8 @@ pos GameState::closestRootToPlayer() const
 				}
 				else
 				{
-					Vector2 curDiff		= { player.getPosX() - i, player.getPosY() - j};
-					Vector2 closestDiff	= { player.getPosX() - closest.x, player.getPosY() - closest.y };
+					Vector2 curDiff		= { (float)(player.getPosX() - i), (float)(player.getPosY() - j)};
+					Vector2 closestDiff	= { (float)(player.getPosX() - closest.x), (float)(player.getPosY() - closest.y) };
 
 					float curLength		= Vector2Length(curDiff);
 					float closestLength	= Vector2Length(closestDiff);

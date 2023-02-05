@@ -363,6 +363,7 @@
     <ClInclude Include="..\..\..\src\MonsterActor.h" />
     <ClInclude Include="..\..\..\src\PlayerActor.h" />
     <ClInclude Include="..\..\..\src\screens.h" />
+    <ClInclude Include="..\..\..\src\SeedActor.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\Actor.cpp" />
@@ -378,6 +379,7 @@
     <ClCompile Include="..\..\..\src\screen_options.cpp" />
     <ClCompile Include="..\..\..\src\screen_gameplay.cpp" />
     <ClCompile Include="..\..\..\src\screen_ending.cpp" />
+    <ClCompile Include="..\..\..\src\SeedActor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\..\..\src\raylib_game.rc" />

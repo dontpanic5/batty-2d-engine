@@ -1,9 +1,4 @@
-add monster for player to kill
-	planning on this being the goal
-	takes multiple turns to kill
 roots spread out instead of straight following
-put bounds on player movement
-roots can't pass through tunnels or pass slowly
 seeds that grow roots
 rocks that block the root
 You should have dry dirt and wet dirt which lets you see that the roots will go to wet dirt first. If you have enough turns, you can go past the root before it gets you. If not, you will go the dry dirt way since the roots will look for wet dirt first. Could even have wet dirt or really wet dirt split roots to be more of a blockage. Could also give the player the ability to place water and lead roots.
