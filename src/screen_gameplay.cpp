@@ -40,7 +40,7 @@ constexpr unsigned int NUM_LEVELS = 3;
 
 Level levels[NUM_LEVELS] =
 {
-    Level(6, 3, 3, 1, 3),
+    Level(6, 4, 3, 1, 3),
     Level(6, 3, 1, 1, 3),
     Level(6, 5, 2, 0, 5)
 };

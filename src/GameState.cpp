@@ -31,7 +31,7 @@ void GameState::update()
 	}
 	if (m_gameStateWinLose == GSWL_WIN)
 	{
-		// TODO next level or done
+		// next level or done
 
 		if (IsKeyPressed(KEY_ENTER))
 		{
@@ -121,7 +121,7 @@ void GameState::draw()
 	{
 		for (int j = 0; j < m_curLevel->getGameUnits(); j++)
 		{
-			if (m_roots[i][j])
+			if (m_roots[i][j] == RS_FILLED)
 			{
 				DrawRectangle(
 					unitToDirtSpaceX(i) - 1,
@@ -129,6 +129,16 @@ void GameState::draw()
 					getUnitSzPx() + 2,
 					getUnitSzPx() + 2,
 					DARKBROWN);
+			}
+			else if (m_roots[i][j] == RS_HALF)
+			{
+				DrawRectangleGradientV(
+					unitToDirtSpaceX(i) - 1,
+					unitToDirtSpaceY(j) - 1,
+					getUnitSzPx() + 2,
+					getUnitSzPx() + 2,
+					DARKBROWN,
+					BLACK);
 			}
 		}
 	}
@@ -189,7 +199,7 @@ void GameState::reset()
 	{
 		for (int j = 0; j < m_curLevel->getGameUnits(); j++)
 		{
-			m_roots[i][j] = false;
+			m_roots[i][j] = RS_NONE;
 		}
 	}
 
@@ -209,12 +219,10 @@ void GameState::resetAll()
 
 void GameState::growRoots()
 {
-	// TODO TIPS CAN GROW ANYWHERE
-
 	if (moveCounter == 0)
 	{
 		//m_rootTips[0] = { m_curLevel.getGameUnits() / 2, 0 };
-		m_roots[m_curLevel->getGameUnits() / 2][0] = true;
+		m_roots[m_curLevel->getGameUnits() / 2][0] = RS_FILLED;
 	}
 	/*else if (moveCounter == 1)
 	{
@@ -244,36 +252,129 @@ void GameState::growRoots()
 	{
 		pos closestRoot = closestRootToPlayer();
 
-		pos diff = { player.getPosX() - closestRoot.x, player.getPosY() - closestRoot.y };
-
-		DIRECTION dirOptions[4] = {DIR_NONE, DIR_NONE, DIR_NONE, DIR_NONE};
-		if (abs(diff.x) > abs(diff.y))
+		if (m_roots[closestRoot.x][closestRoot.y] == RS_HALF)
 		{
-			if (diff.x > 0)
-			{
-				dirOptions[0] = RIGHT;
-			}
-			else
-			{
-				dirOptions[0] = LEFT;
-			}
-		}
-		else if (abs(diff.x) < abs(diff.y))
-		{
-			if (diff.y > 0)
-			{
-				dirOptions[0] = DOWN;
-			}
-			else
-			{
-				dirOptions[0] = UP;
-			}
+			m_roots[closestRoot.x][closestRoot.y] = RS_FILLED;
 		}
 		else
+		{
+			pos diff = { player.getPosX() - closestRoot.x, player.getPosY() - closestRoot.y };
 
-		GameType obstacle = GT_NONE;
-		bool success = moveIfAvailable(closestRoot, dir, GT_ROOT, &obstacle);
-		m_roots[closestRoot.x][closestRoot.y] = true;
+			DIRECTION dirOptions[4] = {DIR_NONE, DIR_NONE, DIR_NONE, DIR_NONE};
+			if (abs(diff.x) > abs(diff.y))
+			{
+				if (diff.x > 0)
+				{
+					dirOptions[0] = RIGHT;
+					if (diff.y > 0)
+					{
+						dirOptions[1] = DOWN;
+					}
+					else if (diff.y < 0)
+					{
+						dirOptions[1] = UP;
+					}
+					else
+					{
+						dirOptions[1] = DOWN;
+						dirOptions[2] = UP;
+					}
+				}
+				else if (diff.x < 0)
+				{
+					dirOptions[0] = LEFT;
+					if (diff.y > 0)
+					{
+						dirOptions[1] = DOWN;
+					}
+					else if (diff.y < 0)
+					{
+						dirOptions[1] = UP;
+					}
+					else
+					{
+						dirOptions[1] = DOWN;
+						dirOptions[2] = UP;
+					}
+				}
+			}
+			else if (abs(diff.x) < abs(diff.y))
+			{
+				if (diff.y > 0)
+				{
+					dirOptions[0] = DOWN;
+					if (diff.x > 0)
+					{
+						dirOptions[1] = RIGHT;
+					}
+					else if (diff.x < 0)
+					{
+						dirOptions[1] = LEFT;
+					}
+					else
+					{
+						dirOptions[1] = LEFT;
+						dirOptions[2] = RIGHT;
+					}
+				}
+				else if (diff.y < 0)
+				{
+					dirOptions[0] = UP;
+					if (diff.x > 0)
+					{
+						dirOptions[1] = RIGHT;
+					}
+					else if (diff.x < 0)
+					{
+						dirOptions[1] = LEFT;
+					}
+					else
+					{
+						dirOptions[1] = LEFT;
+						dirOptions[2] = RIGHT;
+					}
+				}
+			}
+			else
+			{
+				if (diff.x > 0)
+				{
+					dirOptions[0] = RIGHT;
+					if (diff.y > 0)
+					{
+						dirOptions[1] = DOWN;
+					}
+					else if (diff.y < 0)
+					{
+						dirOptions[1] = UP;
+					}
+				}
+				else
+				{
+					dirOptions[0] = LEFT;
+					if (diff.y > 0)
+					{
+						dirOptions[1] = DOWN;
+					}
+					else if (diff.y < 0)
+					{
+						dirOptions[1] = UP;
+					}
+				}
+			}
+
+			GameType obstacle = GT_NONE;
+			bool success = false;
+			int i = 0;
+			do
+			{
+				success = moveIfAvailable(closestRoot, dirOptions[i++], GT_ROOT, &obstacle);
+			} while (!success && dirOptions[i] != DIR_NONE);
+			if (obstacle == GT_TUNNEL)
+				m_roots[closestRoot.x][closestRoot.y] = RS_HALF;
+			else
+				m_roots[closestRoot.x][closestRoot.y] = RS_FILLED;
+		}
 	}
 
 	moveCounter++;
@@ -288,7 +389,7 @@ bool GameState::moveIfAvailable(pos& curPos, DIRECTION dir, GameType me, GameTyp
 		movedPos.x >= m_curLevel->getGameUnits() ||
 		movedPos.y >= m_curLevel->getGameUnits())
 		return false;
-	if ((me == GameType::GT_ROOT || me == GameType::GT_PLAYER) && m_roots[movedPos.x][movedPos.y] == true)
+	if ((me == GameType::GT_ROOT || me == GameType::GT_PLAYER) && m_roots[movedPos.x][movedPos.y] == RS_FILLED)
 	{
 		*obstacleHit = GT_ROOT;
 		return false;
@@ -297,6 +398,12 @@ bool GameState::moveIfAvailable(pos& curPos, DIRECTION dir, GameType me, GameTyp
 	{
 		*obstacleHit = GT_MONSTER;
 		return false;
+	}
+	else if (me == GT_ROOT && !m_dirt[movedPos.x][movedPos.y])
+	{
+		*obstacleHit = GT_TUNNEL;
+		curPos = movedPos;
+		return true;
 	}
 	else
 	{
@@ -336,7 +443,7 @@ pos GameState::closestRootToPlayer() const
 	{
 		for (int j = 0; j < m_curLevel->getGameUnits(); j++)
 		{
-			if (m_roots[i][j])
+			if (m_roots[i][j] == RS_FILLED || m_roots[i][j] == RS_HALF)
 			{
 				if (!foundRoot)
 				{

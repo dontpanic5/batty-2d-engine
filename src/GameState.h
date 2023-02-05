@@ -18,8 +18,15 @@ enum GameType
 	GT_PLAYER,
 	GT_MONSTER,
 	GT_ROOT,
-	GT_TUNNEL, // TODO not yet used
+	GT_TUNNEL,
 	GT_NONE
+};
+
+enum ROOT_STATE
+{
+	RS_NONE,
+	RS_HALF,
+	RS_FILLED
 };
 
 enum GAME_STATE_WIN_LOSE
@@ -62,7 +69,7 @@ protected:
 
 	bool m_dirt[MAX_GAME_UNITS][MAX_GAME_UNITS];
 
-	bool m_roots[MAX_GAME_UNITS][MAX_GAME_UNITS];
+	ROOT_STATE m_roots[MAX_GAME_UNITS][MAX_GAME_UNITS];
 
 	pos m_rootTips[MAX_GAME_UNITS * MAX_GAME_UNITS];
 	unsigned int m_nRootTips = 0;
