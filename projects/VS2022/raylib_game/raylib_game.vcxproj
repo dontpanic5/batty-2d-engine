@@ -364,6 +364,7 @@
     <ClInclude Include="..\..\..\src\PlayerActor.h" />
     <ClInclude Include="..\..\..\src\screens.h" />
     <ClInclude Include="..\..\..\src\SeedActor.h" />
+    <ClInclude Include="..\..\..\src\TreeActor.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\Actor.cpp" />

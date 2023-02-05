@@ -2,6 +2,7 @@
 #include "GameState.h"
 #include <math.h>
 #include "Level.h"
+#include "screens.h"
 
 pos moveInDir(pos pos, DIRECTION dir);
 
@@ -31,6 +32,12 @@ void GameState::init()
 
 void GameState::update()
 {
+	float played = GetMusicTimePlayed(music);
+	if (played > m_musicStopTime)
+	{
+		PauseMusicStream(music);
+	}
+
 	if (m_gameStateWinLose == GSWL_LOSE)
 	{
 		if (IsKeyPressed(KEY_ENTER))
@@ -70,6 +77,8 @@ void GameState::update()
 
 	if (player.playerMoved())
 	{
+		playMusic();
+
 		growRoots();
 
 		player.UpdateDeath(*this);
@@ -198,6 +207,28 @@ int GameState::unitToDirtSpaceY(int unit) const
 	return (SCREEN_HEIGHT - TREE_HEIGHT) * unit / m_curLevel->getGameUnits() + TREE_HEIGHT;
 }
 
+void GameState::playMusic()
+{
+	float played = GetMusicTimePlayed(music);
+	if (!m_startedMusic)
+	{
+		PlayMusicStream(music);
+		m_startedMusic = true;
+		m_musicStopTime = 5;
+	}
+	else if (!IsMusicStreamPlaying(music))
+	{
+		PlayMusicStream(music);
+		m_musicStopTime = played + 5;
+	}
+	else
+	{
+		float timeLeft = m_musicStopTime - played;
+		float toAdd = 5 - timeLeft;
+		m_musicStopTime += toAdd;
+	}
+}
+
 void GameState::reset()
 {
 	m_gameStateWinLose = GSWL_NONE;
@@ -230,6 +261,11 @@ void GameState::resetAll()
 	reset();
 	player = PlayerActor(m_curLevel->getPlayerX(), m_curLevel->getPlayerY());
 	monster = MonsterActor(m_curLevel->getMonsterX(), m_curLevel->getMonsterY());
+}
+
+void growRoots2(GameState gameState)
+{
+
 }
 
 void GameState::growRoots()

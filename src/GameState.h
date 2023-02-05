@@ -61,6 +61,8 @@ public:
 	int unitToDirtSpaceX(int unit) const;
 	int unitToDirtSpaceY(int unit) const;
 
+	void playMusic();
+
 protected:
 	Level *m_curLevel;
 #ifdef LEVEL_SKIP
@@ -92,6 +94,10 @@ protected:
 	void resetAll();
 
 	void growRoots();
+
+	Music m_music;
+	bool m_startedMusic = false;
+	float m_musicStopTime;
 };
 
 #endif // !GAME_STATE_H_INCLUDED
