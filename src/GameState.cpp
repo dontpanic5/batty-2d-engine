@@ -16,7 +16,7 @@ GameState::GameState(Level *level, int nLevels)
 	{
 		for (int i = 0; i < level->getNSeed(); i++)
 		{
-			seeds[i] = SeedActor(level->getSeed(i).seedX, level->getSeed(i).seedY);
+			//seeds[i] = SeedActor(level->getSeed(i).seedX, level->getSeed(i).seedY);
 		}
 	}
 
@@ -27,7 +27,7 @@ void GameState::init()
 {
 	player.initPlayerActor();
 	monster.initMonsterActor();
-	seeds[0].initSeedActor();
+	//seeds[0].initSeedActor();
 }
 
 void GameState::update()
@@ -164,7 +164,7 @@ void GameState::draw()
 
 	for (int i = 0; i < m_nSeeds; i++)
 	{
-		seeds[i].DrawActor(*this);
+		//seeds[i].DrawActor(*this);
 	}
 
 	monster.DrawActor(*this);
