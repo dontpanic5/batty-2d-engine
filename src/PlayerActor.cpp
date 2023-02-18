@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include "GameDefs.h"
 #include "GameState.h"
+#include "screens.h"
 
 bool		PlayerActor::m_initialized;
 Texture2D	PlayerActor::s_miner;
@@ -79,6 +80,8 @@ void PlayerActor::UpdateActor(const GameState& gameState)
 		m_moved = gameState.moveIfAvailable(myPos, dir, GameType::GT_PLAYER, &obstacleHit);
 		if (m_moved)
 		{
+			PlaySound(dig);
+
 			m_posX = myPos.x;
 			m_posY = myPos.y;
 			m_dir = dir;

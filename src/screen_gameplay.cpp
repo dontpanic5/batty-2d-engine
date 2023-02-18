@@ -36,7 +36,7 @@
 static int framesCounter = 0;
 static int finishScreen = 0;
 
-constexpr unsigned int NUM_LEVELS = 10;
+constexpr unsigned int NUM_LEVELS = 9;
 
 SeedSpecifier level10Seeds[1] = {{5, 5}};
 
@@ -50,8 +50,8 @@ Level levels[NUM_LEVELS] =
     Level(6, 5, 0, 0, 2),
     Level(6, 5, 0, 0, 1),
     Level(6, 5, 0, 0, 0),
-    Level(6, 5, 2, 0, 0),
-    Level(6, 4, 3, 1, 3, level10Seeds, 1)
+    Level(6, 5, 2, 0, 0)//,
+    //Level(6, 4, 3, 1, 3, level10Seeds, 1)
 };
 
 #ifdef LEVEL_SKIP
@@ -89,7 +89,7 @@ void UpdateGameplayScreen(void)
     /*if (IsKeyPressed(KEY_ENTER) || IsGestureDetected(GESTURE_TAP))
     {
         finishScreen = 1;
-        PlaySound(fxCoin);
+        PlaySound(dig);
     }*/
 }
 
