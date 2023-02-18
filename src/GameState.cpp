@@ -9,16 +9,16 @@ pos moveInDir(pos pos, DIRECTION dir);
 GameState::GameState(Level *level, int nLevels)
 	: m_curLevel(level), m_nLevels(nLevels),
 	player(level[0].getPlayerX(), level[0].getPlayerY()),
-	monster(level[0].getMonsterX(), level[0].getMonsterY()),
-	m_nSeeds(level[0].getNSeed())
+	monster(level[0].getMonsterX(), level[0].getMonsterY())//,
+	//m_nSeeds(level[0].getNSeed())
 {
-	if (level->getNSeed())
+	/*if (level->getNSeed())
 	{
 		for (int i = 0; i < level->getNSeed(); i++)
 		{
 			//seeds[i] = SeedActor(level->getSeed(i).seedX, level->getSeed(i).seedY);
 		}
-	}
+	}*/
 
 	reset();
 }
@@ -77,6 +77,8 @@ void GameState::update()
 
 	if (player.playerMoved())
 	{
+		m_started = true;
+
 		playMusic();
 
 		growRoots();
@@ -162,9 +164,9 @@ void GameState::draw()
 		}
 	}
 
-	for (int i = 0; i < m_nSeeds; i++)
+	/*for (int i = 0; i < m_nSeeds; i++)
 	{
-		//seeds[i].DrawActor(*this);
+		seeds[i].DrawActor(*this);
 	}
 
 	monster.DrawActor(*this);
@@ -184,6 +186,11 @@ void GameState::draw()
 	else if (m_gameStateWinLose == GSWL_END)
 	{
 		DrawText("YOU HAVE EXPLODED ALL THE MONSTERS.", 10, 300, 22, MAROON);
+	}
+	else if (!m_started)
+	{
+		DrawText("CLICK ON SCREEN TO START.", 10, 300, 22, MAROON);
+		DrawText("USE ARROW KEYS TO MOVE.", 10, 340, 22, MAROON);
 	}
 }
 

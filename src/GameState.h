@@ -77,7 +77,7 @@ protected:
 	MonsterActor monster;
 
 	//SeedActor	seeds[MAX_SEEDS];
-	int			m_nSeeds = 0;
+	//int			m_nSeeds = 0;
 
 	bool m_dirt[MAX_GAME_UNITS][MAX_GAME_UNITS];
 
@@ -98,6 +98,8 @@ protected:
 	Music m_music;
 	bool m_startedMusic = false;
 	float m_musicStopTime;
+
+	bool m_started = false;
 };
 
 #endif // !GAME_STATE_H_INCLUDED

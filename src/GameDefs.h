@@ -7,7 +7,7 @@ constexpr int SCREEN_HEIGHT		= SCREEN_WIDTH + TREE_HEIGHT;
 
 constexpr int MAX_GAME_UNITS	= 20;
 
-#define DEBUG
+//#define DEBUG
 #ifdef DEBUG
 #define DRAW_GRID
 #define LEVEL_SKIP 10
